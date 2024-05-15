@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchQuestions();
 });
 
+let questionsData = []; // To store the fetched questions
+
 async function fetchQuestions() {
     const response = await fetch('https://the-trivia-api.com/v2/questions?limit=5');
     const data = await response.json();
+    questionsData = data;
     displayQuestions(data);
 }
 
@@ -15,7 +18,7 @@ function displayQuestions(questions) {
         const questionElement = document.createElement('div');
         questionElement.classList.add('question');
         questionElement.innerHTML = `
-            <p>${question.question}</p>
+            <p>${question.question.text}</p>
             <div class="answers">
                 ${[...question.incorrectAnswers, question.correctAnswer].sort().map((answer, i) => `
                     <label>
