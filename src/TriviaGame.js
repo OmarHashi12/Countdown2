@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import fetchQuestions from '../services/triviaService';
 import { Button, Card, CardContent, Typography, Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
-import './TriviaGame.css'; // Add CSS file for styling
+import './TriviaGame.css';
 
 const TriviaGame = () => {
   const [questions, setQuestions] = useState([]);
@@ -11,6 +11,7 @@ const TriviaGame = () => {
   useEffect(() => {
     const getQuestions = async () => {
       const data = await fetchQuestions();
+      console.log(data); // Log data to check if it is correctly fetched
       setQuestions(data);
     };
     getQuestions();
@@ -32,18 +33,18 @@ const TriviaGame = () => {
 
   return (
     <div className="trivia-container">
-      {questions.map((question) => (
+      {questions.length > 0 ? questions.map((question) => (
         <Card key={question.id} className="trivia-card">
           <CardContent>
             <Typography variant="h5">{question.question}</Typography>
             <RadioGroup onChange={(e) => handleAnswerChange(question.id, e.target.value)}>
-              {question.incorrectAnswers.concat(question.correctAnswer).sort().map((answer, index) => (
+              {[...question.incorrectAnswers, question.correctAnswer].sort().map((answer, index) => (
                 <FormControlLabel key={index} value={answer} control={<Radio />} label={answer} />
               ))}
             </RadioGroup>
           </CardContent>
         </Card>
-      ))}
+      )) : <Typography variant="h6">Loading questions...</Typography>}
       <Button variant="contained" color="primary" onClick={checkAnswers} className="submit-button">Submit</Button>
       <Typography variant="h6" className="score">Score: {score}</Typography>
     </div>
