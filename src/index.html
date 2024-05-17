@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivia Game</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivia Game</title>
+  <!-- Include Material UI CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/@material-ui/core@4.11.4/umd/material-ui.min.css">
+  <!-- Include your custom CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Trivia Game</h1>
-        <div id="question-container"></div>
-        <button id="submit-btn" onclick="checkAnswers()">Submit</button>
-        <p id="score"></p>
-    </div>
-    <script src="triviaService.js"></script>
+  <div id="root"></div>
+
+  <!-- React and ReactDOM via CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- Babel for JSX transpiling -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Your custom JavaScript -->
+  <script type="text/babel" src="app.js"></script>
 </body>
 </html>
