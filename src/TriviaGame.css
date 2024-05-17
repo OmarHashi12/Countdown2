@@ -1,0 +1,21 @@
+.trivia-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .trivia-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 10px 0;
+  }
+  
+  .submit-button {
+    margin-top: 20px;
+  }
+  
+  .score {
+    margin-top: 20px;
+  }
+  
