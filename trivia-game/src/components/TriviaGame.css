@@ -9,10 +9,32 @@
     width: 100%;
     max-width: 600px;
     margin: 10px 0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .trivia-question {
+    margin-bottom: 10px;
+  }
+  
+  .trivia-answers label {
+    display: block;
+    margin: 5px 0;
   }
   
   .submit-button {
     margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
   }
   
   .score {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import fetchQuestions from '../services/triviaService';
-import { Button, Card, CardContent, Typography, Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
-import './TriviaGame.css'; // Add CSS file for styling
+import './TriviaGame.css';
 
 const TriviaGame = () => {
   const [questions, setQuestions] = useState([]);
@@ -11,6 +10,7 @@ const TriviaGame = () => {
   useEffect(() => {
     const getQuestions = async () => {
       const data = await fetchQuestions();
+      console.log(data); // Log the data to inspect its structure
       setQuestions(data);
     };
     getQuestions();
@@ -33,19 +33,27 @@ const TriviaGame = () => {
   return (
     <div className="trivia-container">
       {questions.map((question) => (
-        <Card key={question.id} className="trivia-card">
-          <CardContent>
-            <Typography variant="h5">{question.question}</Typography>
-            <RadioGroup onChange={(e) => handleAnswerChange(question.id, e.target.value)}>
-              {question.incorrectAnswers.concat(question.correctAnswer).sort().map((answer, index) => (
-                <FormControlLabel key={index} value={answer} control={<Radio />} label={answer} />
-              ))}
-            </RadioGroup>
-          </CardContent>
-        </Card>
+        <div key={question.id} className="trivia-card">
+          <div className="trivia-question">
+            <h5>{question.question.text || question.question}</h5>
+          </div>
+          <div className="trivia-answers">
+            {question.incorrectAnswers.concat(question.correctAnswer).sort().map((answer, index) => (
+              <label key={index}>
+                <input
+                  type="radio"
+                  name={question.id}
+                  value={answer}
+                  onChange={() => handleAnswerChange(question.id, answer)}
+                />
+                {answer.text ? answer.text : answer}
+              </label>
+            ))}
+          </div>
+        </div>
       ))}
-      <Button variant="contained" color="primary" onClick={checkAnswers} className="submit-button">Submit</Button>
-      <Typography variant="h6" className="score">Score: {score}</Typography>
+      <button onClick={checkAnswers} className="submit-button">Submit</button>
+      <div className="score">Score: {score}</div>
     </div>
   );
 };
